@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Video Chat with Strangers</title>
+    
+    <!-- Bootstrap CSS (Replit dark theme) -->
+    <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Header -->
+    <header class="bg-dark py-3">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1 class="h3 mb-0 text-white">
+                    <i class="fas fa-video me-2"></i> Random Video Chat
+                </h1>
+                <div id="user-count-container">
+                    <span class="badge bg-primary">
+                        <i class="fas fa-users me-1"></i> 
+                        <span id="user-count">0</span> online
+                    </span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="flex-grow-1 py-4">
+        <div class="container">
+            <div class="row main-row">
+                <!-- Video section (left/top) -->
+                <div class="col-lg-8 mb-4 mb-lg-0">
+                    <div id="status-container">
+                        <div id="status" class="alert alert-info">
+                            Initializing camera and microphone...
+                        </div>
+                    </div>
+                    
+                    <div id="video-container" class="mb-4">
+                        <div class="video-wrapper">
+                            <video id="remote-video" autoplay playsinline></video>
+                            <div id="local-video-container">
+                                <video id="local-video" autoplay playsinline muted></video>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="controls-container" class="text-center">
+                        <button id="find-button" class="btn btn-primary btn-lg me-2" disabled>
+                            <i class="fas fa-search me-1"></i> Find Someone
+                        </button>
+                        <button id="stop-button" class="btn btn-warning btn-lg me-2">
+                            <i class="fas fa-stop me-1"></i> Stop Search
+                        </button>
+                        <button id="leave-button" class="btn btn-danger btn-lg">
+                            <i class="fas fa-sign-out-alt me-1"></i> Leave Chat
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Chat section (right/bottom) -->
+                <div class="col-lg-4">
+                    <div class="card bg-dark h-100">
+                        <div class="card-header bg-secondary">
+                            <h4 class="mb-0">
+                                <i class="fas fa-comments me-2"></i> Chat
+                            </h4>
+                        </div>
+                        <div class="card-body p-0 d-flex flex-column">
+                            <div id="chat-container" class="d-none">
+                                <div id="chat-messages"></div>
+                                <form id="chat-form">
+                                    <div class="input-group">
+                                        <input type="text" id="chat-input" class="form-control" placeholder="Type a message..." autocomplete="off">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-paper-plane"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <div class="instructions mt-3 p-3">
+                                <h5>How to use:</h5>
+                                <ol>
+                                    <li>Allow camera and microphone access when prompted</li>
+                                    <li>Click "Find Someone" to be matched with a random person</li>
+                                    <li>Chat via video and text with your new connection</li>
+                                    <li>Click "Leave Chat" when you're done and want to find someone new</li>
+                                </ol>
+                                <div class="alert alert-warning mt-3">
+                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                    Always be respectful and follow appropriate online behavior when chatting with strangers.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-3 mt-auto">
+        <div class="container text-center">
+            <p class="mb-0">
+                <small>Random Video Chat &copy; 2023 | Powered by WebRTC</small>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Socket.IO library -->
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
